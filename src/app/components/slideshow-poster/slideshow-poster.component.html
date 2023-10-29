@@ -1,0 +1,7 @@
+
+
+<swiper-container [slidesPerView]="2.7" [spaceBetween]="-10">
+  <swiper-slide *ngFor="let pelicula of peliculas" class="ion-padding">
+      <img [src]="pelicula.poster_path | images" class="poster" />
+  </swiper-slide>
+</swiper-container>

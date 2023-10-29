@@ -1,0 +1,12 @@
+
+
+
+<swiper-container [slidesPerView]="2.7" [spaceBetween]="-10" [threshold]="0.5" (reachEnd)="loadMore()">
+  <swiper-slide *ngFor="let par of peliculas | pares" class="ion-padding">
+    <ion-row>
+      <ion-col size="12" *ngFor="let pelicula of par">
+        <img [src]="pelicula.poster_path | images" class="poster" />
+      </ion-col>
+    </ion-row>
+  </swiper-slide>
+</swiper-container>

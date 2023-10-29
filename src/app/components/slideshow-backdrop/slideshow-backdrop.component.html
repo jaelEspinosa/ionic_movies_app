@@ -1,0 +1,9 @@
+
+
+<swiper-container [slidesPerView]="1.1" [loop]="true" [autoplay]="true" >
+  <swiper-slide *ngFor="let pelicula of peliculas" class="ion-padding">
+
+      <img [src]="pelicula.backdrop_path | images" class="slide-image" />
+
+  </swiper-slide>
+</swiper-container>
