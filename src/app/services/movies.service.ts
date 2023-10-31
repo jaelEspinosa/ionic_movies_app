@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { RespuestaMDB } from '../interfaces/interfaces';
-import { Observable } from 'rxjs';
+import { Observable,  tap } from 'rxjs';
 
 
 
@@ -16,23 +16,27 @@ export class MoviesService {
 
   constructor() { }
 
-  private http = inject ( HttpClient )
-  private currentPage = 0
+  private http = inject ( HttpClient );
+  private _currentPage = 0;
+  private _totalPages = 0;
+
+
 
 
   private ejecutarQuery<T>( query: string){
       query = baseUrl + query;
       query += `&api_key=${ apikey }&language=es&include_image_language=es`
       return this.http.get<T>( query )
-
   }
 
+
   getPopulars():Observable<RespuestaMDB> {
-    this.currentPage++
+    this._currentPage++;
 
-    const query= `/discover/movie?sort_by=popularity.desc&page=${this.currentPage}`
+      const query= `/discover/movie?sort_by=popularity.desc&page=${this._currentPage}`
 
-    return this.ejecutarQuery<RespuestaMDB>(query )
+      return this.ejecutarQuery<RespuestaMDB>(query)
+
   }
 
   getFeacture():Observable<RespuestaMDB> {
@@ -54,6 +58,8 @@ export class MoviesService {
 
     return this.ejecutarQuery<RespuestaMDB>(`/discover/movie?primary_release_date.gte=${ init }&primary_release_date.lte=${ final }`);
   }
+
+
 }
 
 

@@ -19,6 +19,7 @@ export class Tab1Page implements OnInit{
 
   peliculasRecientes: Pelicula[] = [];
   populares: Pelicula[] = [];
+  error: boolean = false
 
   public urlImg: string = ''
   constructor() {
@@ -26,6 +27,7 @@ export class Tab1Page implements OnInit{
 
   }
   private movieSvc = inject ( MoviesService )
+
 
 
   ngOnInit() {
@@ -36,13 +38,32 @@ export class Tab1Page implements OnInit{
     this.loadPopulars()
   }
 
+  loadMore(){
+    console.log('cargando mas...')
+
+    this.loadPopulars()
+  }
 
   loadPopulars() {
     this.movieSvc.getPopulars()
-    .subscribe(resp => {
-      this.populares = resp.results;
-      console.log('populares: ', this.populares)
-      })
+    .subscribe({
+      next:
+      resp => {
+
+        const newPopulares = [...this.populares, ...resp.results]
+
+        this.populares = newPopulares;
+
+
+        console.log('populares: ', this.populares)
+        },
+      error: err =>{
+        console.log(err)
+        this.error = true
+      }
+    }
+
+    )
   }
 
 }

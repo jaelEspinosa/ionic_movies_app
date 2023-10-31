@@ -1,12 +1,31 @@
 
+   <ion-list lines="none"
+             style="display: flex;
+                    flex-direction: row;
+                    overflow-x: scroll;"
+             (scroll) = "onScroll($event)"
+                    >
+   <ion-item  *ngFor="let pares of peliculas | pares" class="item-horizontal">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div *ngFor="let pelicula of pares" (click) = "onClick(pelicula)">
+            <img   [src]= "pelicula.poster_path | images" class="poster2"  />
+          </div>
+        </div>
+   </ion-item>
 
+   <ion-item
+         class="myIon-item"
+          *ngIf="!error"
+                >
+    <div class="mySpinner-container">
+      <div class="mySpinner">
+        <ion-spinner name="bubbles"></ion-spinner>
+      </div>
+      <div class="mySpinner">
+        <ion-spinner name="bubbles"></ion-spinner>
+      </div>
+    </div>
 
-<swiper-container [slidesPerView]="2.7" [spaceBetween]="-10" (reachEnd)="loadMore()">
-  <swiper-slide *ngFor="let par of peliculas | pares" class="ion-padding">
-    <ion-row>
-      <ion-col size="12" *ngFor="let pelicula of par">
-        <img [src]="pelicula.poster_path | images" class="poster" />
-      </ion-col>
-    </ion-row>
-  </swiper-slide>
-</swiper-container>
+   </ion-item>
+  </ion-list>
+

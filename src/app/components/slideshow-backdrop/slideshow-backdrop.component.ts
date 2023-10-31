@@ -13,4 +13,8 @@ export class SlideshowBackdropComponent  implements OnInit {
 
   ngOnInit() {}
 
+
+  onclick(pelicula:Pelicula) {
+    console.log('diste click en ', pelicula.title)
+  }
 }

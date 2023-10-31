@@ -29,8 +29,7 @@
       <ion-col>
         <h3>Populares</h3>
       </ion-col>
-
     </ion-row>
-    <slideshow-pares [peliculas]="populares"></slideshow-pares>
+    <slideshow-pares [error] = "error"  [peliculas]="populares" (loadMoreData)="loadMore()"></slideshow-pares>
   </ion-grid>
 </ion-content>

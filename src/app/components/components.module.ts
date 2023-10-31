@@ -8,6 +8,7 @@ import { SlideshowParesComponent } from './slideshow-pares/slideshow-pares.compo
 
 
 
+
 @NgModule({
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA   // importacion necesaria para el swiperSlide.
@@ -25,7 +26,8 @@ import { SlideshowParesComponent } from './slideshow-pares/slideshow-pares.compo
   imports: [
     IonicModule,
     CommonModule,
-    PipesModule
+    PipesModule,
+
   ]
 })
 export class ComponentsModule { }
