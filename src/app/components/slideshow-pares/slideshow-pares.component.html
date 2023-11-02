@@ -7,7 +7,7 @@
                     >
    <ion-item  *ngFor="let pares of peliculas | pares" class="item-horizontal">
         <div style="display: flex; flex-direction: column; gap: 20px;">
-          <div *ngFor="let pelicula of pares" (click) = "onClick(pelicula)">
+          <div *ngFor="let pelicula of pares" (click) = "verDetalle(pelicula.id)">
             <img   [src]= "pelicula.poster_path | images" class="poster2"  />
           </div>
         </div>

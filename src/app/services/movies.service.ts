@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { RespuestaMDB } from '../interfaces/interfaces';
+import { PeliculaDetalle, RespuestaMDB } from '../interfaces/interfaces';
 import { Observable,  tap } from 'rxjs';
 
 
@@ -57,6 +57,14 @@ export class MoviesService {
     const final = `${ today.getFullYear() }-${ monthString }-${lastDay}`
 
     return this.ejecutarQuery<RespuestaMDB>(`/discover/movie?primary_release_date.gte=${ init }&primary_release_date.lte=${ final }`);
+  }
+
+  getPeliculaDetalle( id: number):Observable<PeliculaDetalle> {
+    return this.ejecutarQuery<PeliculaDetalle>(`/movie/${id}?a=1`)
+  }
+
+  getActoresPelicula( id: number):Observable<PeliculaDetalle> {
+    return this.ejecutarQuery<PeliculaDetalle>(`/movie/${id}/credits?a=1`)
   }
 
 

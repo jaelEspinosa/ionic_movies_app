@@ -5,6 +5,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { IonicModule } from '@ionic/angular';
 import { SlideshowPosterComponent } from './slideshow-poster/slideshow-poster.component';
 import { SlideshowParesComponent } from './slideshow-pares/slideshow-pares.component';
+import { DetalleComponent } from './detalle/detalle.component';
 
 
 
@@ -16,11 +17,13 @@ import { SlideshowParesComponent } from './slideshow-pares/slideshow-pares.compo
   declarations: [
     SlideshowBackdropComponent,
     SlideshowPosterComponent,
-    SlideshowParesComponent
+    SlideshowParesComponent,
+    DetalleComponent,
   ],
   exports:[
     SlideshowBackdropComponent,
     SlideshowPosterComponent,
+    DetalleComponent,
     SlideshowParesComponent
   ],
   imports: [

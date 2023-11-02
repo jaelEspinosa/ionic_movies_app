@@ -3,7 +3,7 @@
 <swiper-container [slidesPerView]="1.1" [autoplay]="true" >
   <swiper-slide *ngFor="let pelicula of peliculas" class="ion-padding">
 
-      <img [src]="pelicula.backdrop_path | images" class="slide-image" (click)="onclick(pelicula)"/>
+      <img [src]="pelicula.backdrop_path | images" class="slide-image" (click)="verDetalle(pelicula.id)"/>
 
   </swiper-slide>
 </swiper-container>

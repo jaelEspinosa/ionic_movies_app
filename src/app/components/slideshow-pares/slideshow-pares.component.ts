@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, inject} from '@angular/core';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { Component, EventEmitter, Input, OnInit, Output, inject} from '@angular/core';
+import { ModalController } from '@ionic/angular';
+
 import { Pelicula } from 'src/app/interfaces/interfaces';
 import { MoviesService } from 'src/app/services/movies.service';
 import { environment } from 'src/environments/environment';
 import { register } from 'swiper/element';
+import { DetalleComponent } from '../detalle/detalle.component';
 
 
 
@@ -17,9 +19,9 @@ register();
 export class SlideshowParesComponent  implements OnInit {
 
   moviesSvc = inject( MoviesService )
+  modalCtrl = inject ( ModalController )
   urlImg = environment.imgUrl
-  @ViewChild( IonInfiniteScroll, { static:true } ) infiniteScroll!: IonInfiniteScroll; // añadiendo { static:true } al @ViewChild evitamos que éste
-  // sea undefined en el ngOnInit()
+
 
   @Input() peliculas: Pelicula[] = [];
   @Input() isLoading: boolean = false;
@@ -32,15 +34,18 @@ export class SlideshowParesComponent  implements OnInit {
 
   ngOnInit() {}
 
- onClick(pelicula:Pelicula) {
-    console.log('diste click en :', pelicula.title)
- }
+  async verDetalle(id: number) {
 
-  loadMore(){
-    setTimeout(() => {
-      this.infiniteScroll.complete();
-    }, 700);
+    const modal = await this.modalCtrl.create({
+      component: DetalleComponent,
+      componentProps:{
+        id
+      }
+    })
+    modal.present();
   }
+
+
 
   onScroll(event: any){
     if (this.isEndOfScroll(event)) {

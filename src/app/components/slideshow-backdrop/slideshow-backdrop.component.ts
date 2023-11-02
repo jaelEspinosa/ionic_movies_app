@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Pelicula } from 'src/app/interfaces/interfaces';
+import { DetalleComponent } from '../detalle/detalle.component';
 
 @Component({
   selector: 'slideshow-backdrop',
@@ -8,13 +10,25 @@ import { Pelicula } from 'src/app/interfaces/interfaces';
 })
 export class SlideshowBackdropComponent  implements OnInit {
 
+  modalCtrl = inject ( ModalController )
+
   @Input() peliculas: Pelicula [] =[]
   constructor() { }
 
   ngOnInit() {}
 
 
-  onclick(pelicula:Pelicula) {
-    console.log('diste click en ', pelicula.title)
+  async verDetalle(id: number) {
+
+    const modal = await this.modalCtrl.create({
+      component: DetalleComponent,
+      componentProps:{
+        id
+      }
+    })
+    modal.present();
   }
+
+
+
 }
