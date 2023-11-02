@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { PeliculaDetalle, RespuestaMDB } from '../interfaces/interfaces';
-import { Observable,  tap } from 'rxjs';
+import { PeliculaDetalle, RespuestaCredits, RespuestaMDB } from '../interfaces/interfaces';
+import { Observable } from 'rxjs';
 
 
 
@@ -63,8 +63,8 @@ export class MoviesService {
     return this.ejecutarQuery<PeliculaDetalle>(`/movie/${id}?a=1`)
   }
 
-  getActoresPelicula( id: number):Observable<PeliculaDetalle> {
-    return this.ejecutarQuery<PeliculaDetalle>(`/movie/${id}/credits?a=1`)
+  getActoresPelicula( id: number):Observable<RespuestaCredits> {
+    return this.ejecutarQuery<RespuestaCredits>(`/movie/${id}/credits?a=1`)
   }
 
 
