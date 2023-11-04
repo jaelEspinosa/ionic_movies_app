@@ -1,17 +1,39 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border" mode="ios">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
+    <ion-title class="ion-padding">
+      Resultados para "{{textoBuscar}}"
     </ion-title>
   </ion-toolbar>
+  <ion-label  class="ion-padding" *ngIf="ideas.length > 0">Coincidencias</ion-label>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header collapse="condense"  class="ion-no-border" mode="ios">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Buscar Pelicula</ion-title>
+    <ion-searchbar class="ion-padding" color="light" (input)="buscar( $event )" [value]="textoBuscar" placeholder="Titulo de la película"></ion-searchbar>
+
     </ion-toolbar>
   </ion-header>
+  <ion-grid *ngIf="isLoading" fixed>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-spinner name="bubbles"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <ion-list *ngIf="ideas.length > 0">
+    <ion-item *ngFor="let idea of ideas">
+      <ion-label (click)="onClickIdea( idea.id )" color="primary">{{idea.title}}</ion-label>
+    </ion-item>
+  </ion-list>
 
+  <ion-infinite-scroll threshold="25%"
+                       position="bottom"
+                       (ionInfinite)="buscarMas()"
+                       *ngIf="totalPagesResponse > 1 && moviesSvc.currentSearchPage <= totalPagesResponse">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Más resultados...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

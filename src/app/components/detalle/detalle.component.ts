@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { Cast, PeliculaDetalle } from 'src/app/interfaces/interfaces';
 import { MoviesService } from 'src/app/services/movies.service';
 
+
 @Component({
   selector: 'app-detalle',
   templateUrl: './detalle.component.html',
@@ -10,7 +11,9 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class DetalleComponent  implements OnInit {
 
-  constructor() { }
+  constructor() {
+
+  }
 
   pelicula!: PeliculaDetalle;
   actores!: Cast[];
@@ -30,7 +33,7 @@ export class DetalleComponent  implements OnInit {
    this.movieSvc.getPeliculaDetalle( this.id)
     .subscribe( resp => {
       this.pelicula = resp;
-      console.log(resp)
+      console.log('la pelicula es, ',this.pelicula)
     })
 
     this.movieSvc.getActoresPelicula( this.id)
