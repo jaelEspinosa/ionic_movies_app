@@ -2,6 +2,6 @@
   <swiper-slide *ngFor="let serie of tvSeries" class="ion-padding">
 
       <img [src]="serie.backdrop_path | images" class="slide-image" (click)="verDetalle(serie.id)"/>
-       <p>{{serie.name}}</p>
+       <p class="paragraph">{{serie.name}}</p>
   </swiper-slide>
 </swiper-container>
