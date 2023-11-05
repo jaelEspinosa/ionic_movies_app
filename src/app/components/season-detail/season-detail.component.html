@@ -1,0 +1,41 @@
+
+
+
+
+<ion-header [translucent]="true" mode="ios">
+  <ion-toolbar>
+    <ion-title>
+    {{season.name}}
+  </ion-title>
+  <ion-avatar>
+    <img [src]="season.poster_path | images" alt="" class="ion-padding img-title"/>
+  </ion-avatar>
+  <!-- <img [src]="season.poster_path | images" alt="" class="ion-padding img-title"> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense" mode="ios">
+    <ion-toolbar>
+      <ion-title size="large">{{season.name}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <img [src]="season.poster_path | images" alt="" class="ion-padding">
+  <p style="text-align: justify;" class="ion-padding">{{season.overview}}</p>
+  <ion-text color="primary" class="ion-padding">
+    <h5 class="ion-padding-horizontal">Episodios: {{season.episode_count}}</h5>
+    <h6 class="ion-padding-horizontal">1ª emisión: {{season.air_date | customDate}}</h6>
+  </ion-text>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-button (click)="onClick()"  color="primary">
+      <ion-icon slot="start" name="arrow-undo-outline"></ion-icon>
+      Volver
+    </ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

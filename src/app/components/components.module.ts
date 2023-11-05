@@ -10,6 +10,7 @@ import { SlideTvShowBakdropComponent } from './slide-tv-show-bakdrop/slide-tv-sh
 import { SlideTvShowPosterComponent } from './slide-tv-show-poster/slide-tv-show-poster.component';
 import { SlideTvShowParesComponent } from './slide-tv-show-pares/slide-tv-show-pares.component';
 import { TvDetalleComponent } from './tv-detalle/tv-detalle.component';
+import { SeasonDetailComponent } from './season-detail/season-detail.component';
 
 
 
@@ -26,7 +27,8 @@ import { TvDetalleComponent } from './tv-detalle/tv-detalle.component';
     SlideshowParesComponent,
     SlideshowBackdropComponent,
     DetalleComponent,
-    TvDetalleComponent
+    TvDetalleComponent,
+    SeasonDetailComponent
   ],
   exports:[
     SlideTvShowPosterComponent,
@@ -36,7 +38,8 @@ import { TvDetalleComponent } from './tv-detalle/tv-detalle.component';
     SlideshowParesComponent,
     SlideshowBackdropComponent,
     DetalleComponent,
-    TvDetalleComponent
+    TvDetalleComponent,
+    SeasonDetailComponent
   ],
   imports: [
     IonicModule,

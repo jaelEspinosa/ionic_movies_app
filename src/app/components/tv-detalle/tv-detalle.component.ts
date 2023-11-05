@@ -2,6 +2,7 @@ import { Component, Input, OnInit, inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Cast, Season, TvDetalle } from 'src/app/interfaces/tv.interfaces';
 import { TvService } from 'src/app/services/tv.service';
+import { SeasonDetailComponent } from '../season-detail/season-detail.component';
 
 @Component({
   selector: 'app-tv-detalle',
@@ -52,8 +53,16 @@ export class TvDetalleComponent  implements OnInit {
 
  }
 
- showSeason(season :Season) {
-    console.log(season)
+ async showSeason(season :Season) {
+
+
+
+  const seasonModal = await this.modalCtrl.create({
+    component: SeasonDetailComponent,
+    componentProps: {season}
+
+  })
+    seasonModal.present()
  }
 
 }

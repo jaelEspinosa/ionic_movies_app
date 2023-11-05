@@ -42,16 +42,21 @@
       </ion-chip>
     </ion-item>
 
-    <ion-item class="logo-company-container">
-      <ion-chip  [ngClass]="company.logo_path ? '' : 'noDisplay'"
+      <swiper-container [slidesPerView]="3">
+        <swiper-slide *ngFor="let company of pelicula.production_companies"
+                      class="ion-padding"
+                      [ngClass]="company.logo_path ? '' : 'noDisplay'"
+                      >
+      <ion-chip
                  class="logo-company-chip"
                  color="primary"
                  mode="ios"
                  outline="true"
-                 *ngFor="let company of pelicula.production_companies">
+                 >
         <img  *ngIf="company.logo_path" [src]="company.logo_path | images " alt="">
       </ion-chip>
-    </ion-item>
+    </swiper-slide>
+  </swiper-container>
 
     <ion-row>
       <ion-col size="12" class="ion-padding">
