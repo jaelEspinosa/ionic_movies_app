@@ -1,0 +1,6 @@
+<swiper-container [slidesPerView]="2.7" [spaceBetween]="-10">
+  <swiper-slide *ngFor="let serie of tvSeries" class="ion-padding">
+      <img *ngIf="serie.poster_path"[src]="serie.poster_path | images" class="poster" (click)="verDetalle (serie.id)"/>
+      <img *ngIf="!serie.poster_path"src="./assets/no-image-poster.jpg" class="poster" (click)="verDetalle (serie.id)"/>
+  </swiper-slide>
+</swiper-container>

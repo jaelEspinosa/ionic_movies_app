@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { PeliculaDetalle, RespuestaCredits, RespuestaMDB, SearchResults } from '../interfaces/interfaces';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
+import { TvDetalle, TvSeriesResponse, TvCast } from '../interfaces/tv.interfaces';
 
 
 
@@ -12,7 +13,7 @@ const apikey  = environment.apiKey;
 @Injectable({
   providedIn: 'root'
 })
-export class MoviesService {
+export class TvService {
 
   constructor() { }
 
@@ -30,20 +31,20 @@ export class MoviesService {
   private ejecutarQuery<T>( query: string){
       query = baseUrl + query;
       query += `&api_key=${ apikey }&language=es&include_image_language=es`
-     /*  console.log('la query es: ',query) */
+      /* console.log('la query es: ',query) */
       return this.http.get<T>( query )
 
   }
 
 
-  getPopulars():Observable<RespuestaMDB> {
+  getPopulars():Observable<TvSeriesResponse> {
       this._currentPage++;
-      const query= `/discover/movie?sort_by=popularity.desc&page=${this._currentPage}`
-      return this.ejecutarQuery<RespuestaMDB>(query)
+      const query= `/discover/tv?sort_by=popularity.desc&page=${this._currentPage}`
+      return this.ejecutarQuery<TvSeriesResponse>(query)
 
   }
 
-  getFeacture():Observable<RespuestaMDB> {
+  getFeacture():Observable<TvSeriesResponse> {
 
     const today = new Date();
     const lastDay = new Date( today.getFullYear(), today.getMonth() + 1,  0).getDate();
@@ -60,21 +61,21 @@ export class MoviesService {
     const init = `${ today.getFullYear() }-${ monthString }-01`
     const final = `${ today.getFullYear() }-${ monthString }-${lastDay}`
 
-    return this.ejecutarQuery<RespuestaMDB>(`/discover/movie?primary_release_date.gte=${ init }&primary_release_date.lte=${ final }`);
+    return this.ejecutarQuery<TvSeriesResponse>(`/discover/tv?primary_release_date.gte=${ init }&primary_release_date.lte=${ final }`);
   }
 
-  getPeliculaDetalle( id: number):Observable<PeliculaDetalle> {
-    return this.ejecutarQuery<PeliculaDetalle>(`/movie/${id}?a=1`);
+  getPeliculaDetalle( id: number):Observable<TvDetalle> {
+    return this.ejecutarQuery<TvDetalle>(`/tv/${id}?a=1`);
   }
 
-  getActoresPelicula( id: number):Observable<RespuestaCredits> {
-    return this.ejecutarQuery<RespuestaCredits>(`/movie/${id}/credits?a=1`);
+  getActoresPelicula( id: number):Observable<TvCast> {
+    return this.ejecutarQuery<TvCast>(`/tv/${id}/credits?a=1`);
   }
 
   buscarPeliculas( terminoBusqueda: string):Observable<SearchResults> {
 
     this._currentSearchPage ++;
-    return this.ejecutarQuery<SearchResults>(`/search/movie?query=${terminoBusqueda}&page=${this._currentSearchPage}`);
+    return this.ejecutarQuery<SearchResults>(`/search/tv?query=${terminoBusqueda}&page=${this._currentSearchPage}`);
 
   }
 

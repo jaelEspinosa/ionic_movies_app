@@ -1,0 +1,30 @@
+<ion-list lines="none"
+style="display: flex;
+       flex-direction: row;
+       overflow-x: scroll;"
+(scroll) = "onScroll($event)"
+       >
+<ion-item  *ngFor="let pares of tvRecientes | pares" class="item-horizontal">
+<div style="display: flex; flex-direction: column; gap: 20px;">
+<div *ngFor="let serie of pares" (click) = "verDetalle(serie.id)">
+<img *ngIf="serie.poster_path"  [src]= "serie.poster_path | images" class="poster2"  />
+<img *ngIf="!serie.poster_path"  src= "./assets/no-image-poster.jpg" class="poster2"  />
+</div>
+</div>
+</ion-item>
+
+<ion-item
+class="myIon-item"
+*ngIf="!error"
+   >
+<div class="mySpinner-container">
+<div class="mySpinner">
+<ion-spinner name="bubbles"></ion-spinner>
+</div>
+<div class="mySpinner">
+<ion-spinner name="bubbles"></ion-spinner>
+</div>
+</div>
+
+</ion-item>
+</ion-list>

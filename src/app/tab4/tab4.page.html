@@ -1,0 +1,34 @@
+<ion-content [fullscreen]="true">
+
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <h3>Tv/Series Nuevas</h3>
+      </ion-col>
+
+    </ion-row>
+        <tv-show-bakdrop [tvSeries]="tvRecientes"></tv-show-bakdrop>
+  </ion-grid>
+
+<ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <h3>En Emisión</h3>
+      </ion-col>
+
+    </ion-row>
+        <tv-show-poster [tvSeries]="tvRecientes"></tv-show-poster>
+  </ion-grid>
+
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <h3>Populares</h3>
+      </ion-col>
+    </ion-row>
+
+    <tv-show-pares [error] = "error" [tvRecientes]="tvRecientes" (loadMoreData)="loadMore()"></tv-show-pares>
+  </ion-grid>
+</ion-content>

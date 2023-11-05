@@ -4,6 +4,6 @@
   <swiper-slide *ngFor="let pelicula of peliculas" class="ion-padding">
 
       <img [src]="pelicula.backdrop_path | images" class="slide-image" (click)="verDetalle(pelicula.id)"/>
-
+      <p>{{pelicula.title}}</p>
   </swiper-slide>
 </swiper-container>

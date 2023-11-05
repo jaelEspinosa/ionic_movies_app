@@ -1,0 +1,7 @@
+<swiper-container [slidesPerView]="1.1" [autoplay]="true" >
+  <swiper-slide *ngFor="let serie of tvSeries" class="ion-padding">
+
+      <img [src]="serie.backdrop_path | images" class="slide-image" (click)="verDetalle(serie.id)"/>
+       <p>{{serie.name}}</p>
+  </swiper-slide>
+</swiper-container>
