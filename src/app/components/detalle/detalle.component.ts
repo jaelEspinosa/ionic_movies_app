@@ -2,6 +2,7 @@ import { Component, Input, OnInit, inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Cast, PeliculaDetalle } from 'src/app/interfaces/interfaces';
 import { MoviesService } from 'src/app/services/movies.service';
+import { TvService } from 'src/app/services/tv.service';
 
 
 @Component({
@@ -21,26 +22,28 @@ export class DetalleComponent  implements OnInit {
   textoOculto = 150;
 
   movieSvc = inject ( MoviesService)
+  tvSvc = inject ( TvService )
   modalCtrl = inject ( ModalController )
 
 
 
-  @Input() id!: number
+  @Input() id!: number;
+
 
   ngOnInit() {
-    /* console.log('ID: ', this.id) */
 
-   this.movieSvc.getPeliculaDetalle( this.id)
-    .subscribe( resp => {
-      this.pelicula = resp;
-      console.log('la pelicula es, ',this.pelicula)
-    })
+    this.movieSvc.getPeliculaDetalle( this.id)
+     .subscribe( resp => {
+       this.pelicula = resp;
+       console.log('la pelicula es, ',this.pelicula)
+     })
 
-    this.movieSvc.getActoresPelicula( this.id)
-    .subscribe( resp => {
-      this.actores = resp.cast
-      console.log(resp.cast)
-    })
+     this.movieSvc.getActoresPelicula( this.id)
+     .subscribe( resp => {
+       this.actores = resp.cast
+       console.log(resp.cast)
+     })
+
   }
 
   leerMas(){

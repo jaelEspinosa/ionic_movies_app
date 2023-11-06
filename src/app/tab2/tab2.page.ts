@@ -1,8 +1,12 @@
 import { Component, ViewChild, inject } from '@angular/core';
 import { MoviesService } from '../services/movies.service';
 import { Result } from '../interfaces/interfaces';
+
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { DetalleComponent } from '../components/detalle/detalle.component';
+import { TvService } from '../services/tv.service';
+import { TvDetalleComponent } from '../components/tv-detalle/tv-detalle.component';
+import { TvResults } from '../interfaces/tv.interfaces';
 
 @Component({
   selector: 'app-tab2',
@@ -14,9 +18,14 @@ export class Tab2Page {
   @ViewChild( IonInfiniteScroll ) infiniteScroll!:IonInfiniteScroll;
 
   moviesSvc = inject( MoviesService )
+  tvSvc = inject( TvService )
   modalCtrl = inject ( ModalController )
+
+  type: string = 'movie';
+  onOf: boolean = false;
   textoBuscar: string = '';
-  ideas: Result[] = []
+  ideas: Result[] = [];
+  ideasTv : TvResults []= [];
   totalPagesResponse: number = 0;
   isLoading = false;
   constructor() {
@@ -29,21 +38,37 @@ buscarTimeout: any;
 buscar ( event: any ){
   this.isLoading = true
   this.moviesSvc.resetSearchPage();
+  this.tvSvc.resetSearchPage();
   const valor = event.target.value;
-
   clearTimeout(this.buscarTimeout);
-  this.buscarTimeout = setTimeout(() => {
-    this.moviesSvc.buscarPeliculas( valor )
-    .subscribe(resp =>{
-      this.totalPagesResponse = resp.total_pages;
-      this.ideas = resp.results;
-      console.log(resp.results)
-      this.textoBuscar = valor;
-    });
 
-    this.isLoading = false;
+  if (this.type === 'movie'){
+     this.buscarTimeout = setTimeout(() => {
+      this.moviesSvc.buscarPeliculas( valor )
+      .subscribe(resp =>{
+        this.totalPagesResponse = resp.total_pages;
+        this.ideas = resp.results;
+        console.log(resp.results)
+        this.textoBuscar = valor;
+      });
 
-  }, 1000);
+      this.isLoading = false;
+
+    }, 1000);
+  }else{
+    this.buscarTimeout = setTimeout(() => {
+      this.tvSvc.buscarPeliculas( valor )
+      .subscribe(resp =>{
+        this.totalPagesResponse = resp.total_pages;
+        this.ideasTv = resp.results;
+        console.log(resp.results)
+        this.textoBuscar = valor;
+      });
+
+      this.isLoading = false;
+
+    }, 1000);
+  }
 }
 
 buscarMas( ) {
@@ -68,16 +93,37 @@ buscarMas( ) {
 
 
  async onClickIdea( id: number ){
-  const modal = await this.modalCtrl.create({
-    component: DetalleComponent,
-    componentProps:{
-      id
-    }
-  })
-  modal.present();
 
+  if (this.type ==='movie'){
+    const modal = await this.modalCtrl.create({
+      component: DetalleComponent,
+      componentProps:{
+        id
+
+      }
+    })
+    modal.present();
+  }else{
+    const modal = await this.modalCtrl.create({
+      component: TvDetalleComponent,
+      componentProps:{
+        id
+      }
+    })
+    modal.present();
+  }
 }
 
+ToggleChanged(){
+    this.textoBuscar = '';
+    this.ideas = [];
+    this.ideasTv = [];
+    if (this.onOf) {
+    this.type = 'tv';
+  }else{
+    this.type = 'movie';
+  }
+}
 
 }
 

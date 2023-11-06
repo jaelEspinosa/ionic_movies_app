@@ -51,9 +51,11 @@ export interface PeliculaDetalle {
   status:                string;
   tagline:               string;
   title:                 string;
+  name?:                 string;
   video:                 boolean;
   vote_average:          number;
   vote_count:            number;
+  first_air_date?:        string;
 }
 
 export interface BelongsToCollection {

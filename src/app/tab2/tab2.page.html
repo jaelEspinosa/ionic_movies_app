@@ -7,11 +7,21 @@
   <ion-label  class="ion-padding" *ngIf="ideas.length > 0">Coincidencias</ion-label>
 </ion-header>
 
+
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense"  class="ion-no-border" mode="ios">
     <ion-toolbar>
+
       <ion-title size="large">Buscar Pelicula</ion-title>
-    <ion-searchbar class="ion-padding" color="light" (input)="buscar( $event )" [value]="textoBuscar" placeholder="Titulo de la película"></ion-searchbar>
+
+
+        <ion-text class="ion-padding"><span [class]="!onOf ? 'color-type' : ''">Movie</span></ion-text>
+        <ion-toggle color="light" [(ngModel)]="onOf" [checked]="true" (ionChange)="ToggleChanged()" mode="md"class="ion-padding"></ion-toggle>
+        <ion-text class="ion-padding-vertical"><span [class]="onOf ? 'color-type' : ''">Tv</span></ion-text>
+
+
+        <ion-searchbar class="ion-padding" color="light" (input)="buscar( $event )" [value]="textoBuscar" [placeholder]="!onOf ? 'Titulo de la película' : 'Titulo de la SerieTv'"></ion-searchbar>
+
 
     </ion-toolbar>
   </ion-header>
@@ -25,7 +35,13 @@
 
   <ion-list *ngIf="ideas.length > 0">
     <ion-item *ngFor="let idea of ideas">
-      <ion-label (click)="onClickIdea( idea.id )" color="primary">{{idea.title}}</ion-label>
+      <ion-label (click)="onClickIdea( idea.id )" color="primary">{{idea.title }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="ideasTv.length > 0">
+    <ion-item *ngFor="let idea of ideasTv">
+      <ion-label (click)="onClickIdea( idea.id )" color="primary">{{idea.name }}</ion-label>
     </ion-item>
   </ion-list>
 

@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { PeliculaDetalle, RespuestaCredits, RespuestaMDB, SearchResults } from '../interfaces/interfaces';
 import { Observable } from 'rxjs';
-import { TvDetalle, TvSeriesResponse, TvCast } from '../interfaces/tv.interfaces';
+import { TvDetalle, TvSeriesResponse, TvCast, Result } from '../interfaces/tv.interfaces';
 
 
 
@@ -72,10 +71,10 @@ export class TvService {
     return this.ejecutarQuery<TvCast>(`/tv/${id}/credits?a=1`);
   }
 
-  buscarPeliculas( terminoBusqueda: string):Observable<SearchResults> {
+  buscarPeliculas( terminoBusqueda: string):Observable<Result> {
 
     this._currentSearchPage ++;
-    return this.ejecutarQuery<SearchResults>(`/search/tv?query=${terminoBusqueda}&page=${this._currentSearchPage}`);
+    return this.ejecutarQuery<Result>(`/search/tv?query=${terminoBusqueda}&page=${this._currentSearchPage}`);
 
   }
 
