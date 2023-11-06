@@ -68,10 +68,12 @@
       </swiper-container>
 
     <ion-item>
-      <ion-label >
-        <a [href]="serie.homepage" target="_blank" style="display: flex; align-items: center; gap: 10px;">
-        <ion-icon slot="icon-only" name="globe-outline"></ion-icon> Home Page</a>
-    </ion-label>
+
+      <ion-icon sice="large" slot="end" name="globe-outline" (click)="onClickBrowser()" color="primary"></ion-icon>
+        <ion-text color="primary">
+          <p (click)="onClickBrowser()" target="_blank" style="display: flex; align-items: center; gap: 10px;">Sitio Web</p>
+        </ion-text>
+
     </ion-item>
 
 

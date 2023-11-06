@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { Cast, Season, TvDetalle } from 'src/app/interfaces/tv.interfaces';
 import { TvService } from 'src/app/services/tv.service';
 import { SeasonDetailComponent } from '../season-detail/season-detail.component';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 @Component({
   selector: 'app-tv-detalle',
@@ -18,8 +19,10 @@ export class TvDetalleComponent  implements OnInit {
 
   textoOculto = 150;
 
-  tvSvc = inject ( TvService)
-  modalCtrl = inject ( ModalController )
+  private tvSvc = inject ( TvService)
+  private modalCtrl = inject ( ModalController )
+  private iab = inject ( InAppBrowser)
+  private platform = inject( Platform )
 
 
 
@@ -49,20 +52,26 @@ export class TvDetalleComponent  implements OnInit {
  regresar (){
   this.modalCtrl.dismiss()
   }
+
  favoritos (){
 
  }
 
  async showSeason(season :Season) {
-
-
-
-  const seasonModal = await this.modalCtrl.create({
-    component: SeasonDetailComponent,
-    componentProps: {season}
-
-  })
-    seasonModal.present()
+      const seasonModal = await this.modalCtrl.create({
+      component: SeasonDetailComponent,
+      componentProps: {season}
+    })
+      seasonModal.present()
  }
+onClickBrowser(){
+
+  if(this.platform.is('ios') || this.platform.is('android')){
+     const browser = this.iab.create( this.serie.homepage)
+     browser.show();
+     return;
+  }
+  window.open(this.serie.homepage, '_blank')
+}
 
 }
