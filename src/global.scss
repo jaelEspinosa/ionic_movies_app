@@ -125,4 +125,34 @@
  .logo-company-chip img{
   max-height: 32px;
  }
+ .fondo{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 
+  background-image: url('/assets/Streaming-Collage-Image-osc.jpg');
+  background-position: center;
+  background-size: cover;
+  z-index: -1;
+}
+
+.cine{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-image: url('/assets/cine.jpg');
+  background-position: center;
+  background-size: center;
+  z-index: -1;
+}
+
+.pares-cine{
+  background-image: url('/assets/cine.jpg');
+  background-position: center;
+  background-size: center;
+}

@@ -1,22 +1,24 @@
-<ion-header [translucent]="true" class="ion-no-border" mode="ios">
+<ion-header [translucent]="true" class="ion-no-border" mode="ios" >
   <ion-toolbar>
     <ion-title class="ion-padding">
       Resultados para "{{textoBuscar}}"
     </ion-title>
   </ion-toolbar>
   <ion-label  class="ion-padding" *ngIf="ideas.length > 0">Coincidencias</ion-label>
+
 </ion-header>
 
-
 <ion-content [fullscreen]="true">
+  <div [class]="onOf ? 'fondo' : 'cine'"></div>
   <ion-header collapse="condense"  class="ion-no-border" mode="ios">
     <ion-toolbar>
+      <div [class]="onOf ? 'fondo' : 'cine'"></div>
 
-      <ion-title size="large">Buscar Pelicula</ion-title>
+      <ion-title size="large">Buscar</ion-title>
 
 
         <ion-text class="ion-padding"><span [class]="!onOf ? 'color-type' : ''">Movie</span></ion-text>
-        <ion-toggle color="light" [(ngModel)]="onOf" [checked]="true" (ionChange)="ToggleChanged()" mode="md"class="ion-padding"></ion-toggle>
+        <ion-toggle color="primary" [(ngModel)]="onOf" [checked]="true" (ionChange)="ToggleChanged()" mode="md"class="ion-padding"></ion-toggle>
         <ion-text class="ion-padding-vertical"><span [class]="onOf ? 'color-type' : ''">Tv</span></ion-text>
 
 

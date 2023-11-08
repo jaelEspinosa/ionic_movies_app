@@ -4,7 +4,8 @@
                     flex-direction: row;
                     overflow-x: scroll;"
              (scroll) = "onScroll($event)"
-                    >
+                 >
+
    <ion-item  *ngFor="let pares of peliculas | pares" class="item-horizontal">
         <div style="display: flex; flex-direction: column; gap: 20px;">
           <div *ngFor="let pelicula of pares" (click) = "verDetalle(pelicula.id)">
@@ -13,6 +14,7 @@
           </div>
         </div>
    </ion-item>
+
 
    <ion-item
          class="myIon-item"

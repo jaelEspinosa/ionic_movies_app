@@ -1,7 +1,7 @@
 
 
 <ion-content [fullscreen]="true">
-
+  <div class="cine"></div>
 
   <ion-grid fixed>
     <ion-row>
@@ -30,6 +30,7 @@
         <h3>Populares</h3>
       </ion-col>
     </ion-row>
+
     <slideshow-pares [error] = "error"  [peliculas]="populares" (loadMoreData)="loadMore()"></slideshow-pares>
   </ion-grid>
 </ion-content>
