@@ -28,6 +28,7 @@ export class Tab2Page {
   ideasTv : TvResults []= [];
   totalPagesResponse: number = 0;
   isLoading = false;
+  isSearched = false;
   constructor() {
 
   }
@@ -36,7 +37,8 @@ export class Tab2Page {
 buscarTimeout: any;
 
 buscar ( event: any ){
-  this.isLoading = true
+  this.isLoading = true;
+  this.isSearched = false;
   this.moviesSvc.resetSearchPage();
   this.tvSvc.resetSearchPage();
   const valor = event.target.value;
@@ -53,7 +55,11 @@ buscar ( event: any ){
       });
 
       this.isLoading = false;
-
+      setTimeout(() => {
+        if(this.textoBuscar.length > 0){
+          this.isSearched = true;
+        }
+      }, 300);
     }, 1000);
   }else{
     this.buscarTimeout = setTimeout(() => {
@@ -66,7 +72,11 @@ buscar ( event: any ){
       });
 
       this.isLoading = false;
-
+      setTimeout(() => {
+        if(this.textoBuscar.length > 0){
+          this.isSearched = true;
+        }
+      }, 300);
     }, 1000);
   }
 }
@@ -118,6 +128,8 @@ ToggleChanged(){
     this.textoBuscar = '';
     this.ideas = [];
     this.ideasTv = [];
+    this.isSearched=false;
+
     if (this.onOf) {
     this.type = 'tv';
   }else{

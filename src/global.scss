@@ -126,7 +126,7 @@
   max-height: 32px;
  }
  .fondo{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -139,7 +139,7 @@
 }
 
 .cine{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;

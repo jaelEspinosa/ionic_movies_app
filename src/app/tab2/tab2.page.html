@@ -35,17 +35,50 @@
     </ion-row>
   </ion-grid>
 
-  <ion-list *ngIf="ideas.length > 0">
-    <ion-item *ngFor="let idea of ideas">
-      <ion-label (click)="onClickIdea( idea.id )" color="primary">{{idea.title }}</ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-grid *ngIf="!isLoading && isSearched && ideas.length < 1 && ideasTv.length < 1" fixed>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <h1>No Hay coincidencias</h1>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <ion-list *ngIf="ideasTv.length > 0">
-    <ion-item *ngFor="let idea of ideasTv">
-      <ion-label (click)="onClickIdea( idea.id )" color="primary">{{idea.name }}</ion-label>
-    </ion-item>
-  </ion-list>
+
+  <ion-grid fixed *ngIf="ideas.length > 0">
+    <ion-row>
+      <ion-col size="6" sizeSm="4" sizeLg="3" *ngFor="let idea of ideas" >
+        <ion-card (click)="onClickIdea( idea.id )">
+          <img *ngIf="idea.poster_path" [src]="idea.poster_path | images">
+          <img *ngIf="!idea.poster_path" src="/assets/no-image-poster.jpg">
+          <ion-card-header>
+            <ion-card-subtitle *ngIf="idea.release_date">{{idea.release_date | date : 'YYYY' }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            {{idea.title | slice : 0 : 40}} {{idea.title.length > 40 ? '...' : ''}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid fixed *ngIf="ideasTv.length > 0">
+    <ion-row>
+      <ion-col size="6" sizeSm="4" sizeLg="3" *ngFor="let idea of ideasTv" >
+        <ion-card (click)="onClickIdea( idea.id )">
+          <img *ngIf="idea.poster_path" [src]="idea.poster_path | images">
+          <img *ngIf="!idea.poster_path" src="/assets/no-image-poster.jpg">
+          <ion-card-header>
+            <ion-card-subtitle *ngIf="idea.first_air_date">{{idea.first_air_date | date : 'YYYY' }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            {{idea.name | slice : 0 : 40}} {{idea.name.length > 40 ? '...' : ''}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
 
   <ion-infinite-scroll threshold="25%"
                        position="bottom"
