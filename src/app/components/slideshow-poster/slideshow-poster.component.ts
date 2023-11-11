@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Pelicula } from 'src/app/interfaces/interfaces';
+import { Pelicula, PeliculaDetalle } from 'src/app/interfaces/interfaces';
 import { DetalleComponent } from '../detalle/detalle.component';
 
 @Component({
@@ -10,7 +10,7 @@ import { DetalleComponent } from '../detalle/detalle.component';
 })
 export class SlideshowPosterComponent  implements OnInit {
 
-  @Input() peliculas: Pelicula[] = []
+  @Input() peliculas: Pelicula[] | PeliculaDetalle[] = []
 
   modalCtrl = inject ( ModalController )
   constructor() { }

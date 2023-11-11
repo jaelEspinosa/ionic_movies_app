@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Cast, PeliculaDetalle } from 'src/app/interfaces/interfaces';
+import { DataLocalService } from 'src/app/services/data-local.service';
 import { MoviesService } from 'src/app/services/movies.service';
-import { TvService } from 'src/app/services/tv.service';
+
 
 
 @Component({
@@ -21,21 +22,29 @@ export class DetalleComponent  implements OnInit {
 
   textoOculto = 150;
 
-  movieSvc = inject ( MoviesService)
-  tvSvc = inject ( TvService )
-  modalCtrl = inject ( ModalController )
+  private movieSvc = inject ( MoviesService)
+  public  dataSvc = inject ( DataLocalService )
+  private modalCtrl = inject ( ModalController )
 
+  public icon = 'star-outline'
+  public textIcon = 'Favorito'
+
+  private _existe = false;
 
 
   @Input() id!: number;
 
 
-  ngOnInit() {
+  async ngOnInit() {
+
+   this._existe = await this.dataSvc.existePelicula( this.id );
+   this.icon = this._existe ? 'star' : 'star-outline';
+   this.textIcon = this._existe ? 'Quitar' : 'Favorito';
 
     this.movieSvc.getPeliculaDetalle( this.id)
      .subscribe( resp => {
        this.pelicula = resp;
-       console.log('la pelicula es, ',this.pelicula)
+       /* console.log('la pelicula es, ',this.pelicula) */
      })
 
      this.movieSvc.getActoresPelicula( this.id)
@@ -53,7 +62,12 @@ export class DetalleComponent  implements OnInit {
  regresar (){
   this.modalCtrl.dismiss()
   }
- favoritos (){
+
+ async favoritos (){
+   const existe = await this.dataSvc.guardarPelicula( this.pelicula );
+
+   this.icon = existe ? this.icon = 'star' : 'star-outline';
+   this.textIcon = existe ? this.textIcon = 'Quitar' : 'Favorito';
 
  }
 

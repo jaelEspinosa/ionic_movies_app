@@ -37,6 +37,13 @@ export class Tab2Page {
 buscarTimeout: any;
 
 buscar ( event: any ){
+
+  if(event.target.value === ''){
+    this.ideas = [];
+    this.ideasTv = [];
+    this.isSearched=false;
+    return;
+  }
   this.isLoading = true;
   this.isSearched = false;
   this.moviesSvc.resetSearchPage();

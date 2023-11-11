@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { PeliculaDetalle, RespuestaCredits, RespuestaMDB, SearchResults } from '../interfaces/interfaces';
-import { Observable, tap } from 'rxjs';
+import { Genre, PeliculaDetalle, RespuestaCredits, RespuestaMDB, SearchResults, GenreResponse } from '../interfaces/interfaces';
+import { Observable } from 'rxjs';
 
 
 
@@ -19,7 +19,7 @@ export class MoviesService {
   private http = inject ( HttpClient );
   private _currentPage = 0;
   private _currentSearchPage = 0;
-
+  public genres: Genre[] = [];
   isLoading = false;
 
   get currentSearchPage() {
@@ -30,7 +30,7 @@ export class MoviesService {
   private ejecutarQuery<T>( query: string){
       query = baseUrl + query;
       query += `&api_key=${ apikey }&language=es&include_image_language=es`
-     /*  console.log('la query es: ',query) */
+     // console.log('la query es: ',query)
       return this.http.get<T>( query )
 
   }
@@ -82,8 +82,15 @@ export class MoviesService {
     this._currentSearchPage = 0;
   }
 
-
-
+  loadGenre():Promise<Genre[]> {
+    return new Promise( resolve =>{
+      this.ejecutarQuery<GenreResponse>(`/genre/movie/list?a=1`)
+      .subscribe(resp =>{
+        this.genres = resp.genres
+        resolve(this.genres)
+      })
+    })
+  }
 }
 
 

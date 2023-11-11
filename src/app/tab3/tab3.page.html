@@ -13,5 +13,20 @@
     </ion-toolbar>
   </ion-header>
 
+  <div *ngFor="let favorito of favoritosPorGenero">
+
+    <ion-grid fixed  *ngIf="favorito.peliculas.length > 0">
+      <ion-row>
+        <ion-col>
+          <h4>{{favorito.genero.name}}</h4>
+        </ion-col>
+
+      </ion-row>
+      <slideshow-poster [peliculas] = "favorito.peliculas"></slideshow-poster>
+    </ion-grid>
+
+
+  </div>
+
 
 </ion-content>
