@@ -3,9 +3,10 @@ import { Component, inject } from '@angular/core';
 import { PeliculaDetalle } from '../interfaces/interfaces';
 import { DataLocalService } from '../services/data-local.service';
 import { MoviesService } from '../services/movies.service';
-import { Genre } from '../interfaces/tv.interfaces';
+import { Genre, TvDetalle } from '../interfaces/tv.interfaces';
 import { DetalleComponent } from '../components/detalle/detalle.component';
 import { ModalController } from '@ionic/angular';
+import { TvDetalleComponent } from '../components/tv-detalle/tv-detalle.component';
 
 
 @Component({
@@ -32,15 +33,28 @@ export class Tab3Page {
     return this.dataSvc.peliculas
   }
 
-  async verDetalle(id: number) {
+  get tvSeries(): TvDetalle[] {
+    return this.dataSvc.tvSeries
+  }
 
-    const modal = await this.modalCtrl.create({
-      component: DetalleComponent,
-      componentProps:{
-        id
-      }
-    })
-    modal.present();
+  async verDetalle(id: number, type:string = 'movie') {
+    if (type === 'movie'){
+      const modal = await this.modalCtrl.create({
+        component: DetalleComponent,
+        componentProps:{
+          id
+        }
+      })
+      modal.present();
+    }else{
+      const modal = await this.modalCtrl.create({
+        component: TvDetalleComponent,
+        componentProps:{
+          id
+        }
+      })
+      modal.present();
+    }
   }
 
 

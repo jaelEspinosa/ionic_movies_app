@@ -17,8 +17,9 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <div *ngFor="let generos of peliculas | ordenarPorGenero" style="color: var(--ion-color-primary);">
-          <h1 *ngIf="generos.peliculas.length > 0" class="ion-padding">{{generos.genero.name}}</h1>
+        <h1 style="text-align: center;" *ngIf="peliculas.length > 0">Peliculas</h1>
+        <div *ngFor="let generos of peliculas | ordenarPorGenero  " style="color: var(--ion-color-primary);">
+          <h2 *ngIf="generos.peliculas.length > 0" class="ion-padding">{{generos.genero.name}}</h2>
           <div
                     lines="none"
                     style="margin: 5px 5px;
@@ -37,7 +38,32 @@
         <div class="ion-padding"></div>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col>
+        <h1 style="text-align: center;" *ngIf="tvSeries.length > 0" >Tv-Series</h1>
+        <div *ngFor="let generos of tvSeries | ordenarTvPorGenero " style="color: var(--ion-color-secondary);">
+          <h2 *ngIf="generos.peliculas.length > 0" class="ion-padding">{{generos.genero.name}}</h2>
+          <div
+          lines="none"
+          style="margin: 5px 5px;
+                 display: flex;
+                 flex-wrap: wrap;
+                 flex-direction: row;
+                 background-color: #121212;
+                 "
+          *ngIf="generos.peliculas.length > 0"
+              >
+<div  *ngFor="let pelicula of generos.peliculas">
+  <img class="favoritos-panel poster2"  [src]="pelicula.poster_path | images"  (click)="verDetalle(pelicula.id, 'serie')">
+ </div>
+</div>
+        </div>
+
+      </ion-col>
+
+    </ion-row>
   </ion-grid>
+
 </ion-content>
 
-<!-- style="margin: 5px; max-width: 20vw;" -->
+

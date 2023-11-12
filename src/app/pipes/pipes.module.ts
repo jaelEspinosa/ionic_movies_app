@@ -5,6 +5,7 @@ import { ParesPipe } from './pares.pipe';
 import { CustomDatePipe } from './custom-date.pipe';
 import { CustomCountriePipe } from './customCountrie.pipe';
 import { OrdenarPorGeneroPipe } from './ordenar-por-genero.pipe';
+import { OrdenarTvPorGeneroPipe } from './ordenar-tv-por-genero.pipe';
 
 
 
@@ -15,7 +16,8 @@ import { OrdenarPorGeneroPipe } from './ordenar-por-genero.pipe';
     ParesPipe,
     CustomDatePipe,
     CustomCountriePipe,
-    OrdenarPorGeneroPipe
+    OrdenarPorGeneroPipe,
+    OrdenarTvPorGeneroPipe
   ],
   imports: [
     CommonModule
@@ -25,7 +27,8 @@ import { OrdenarPorGeneroPipe } from './ordenar-por-genero.pipe';
     ParesPipe,
     CustomDatePipe,
     CustomCountriePipe,
-    OrdenarPorGeneroPipe
+    OrdenarPorGeneroPipe,
+    OrdenarTvPorGeneroPipe
 
   ]
 })

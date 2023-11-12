@@ -39,8 +39,6 @@ export class Tab1Page implements OnInit{
   }
 
   loadMore(){
-    console.log('cargando mas...')
-
     this.loadPopulars()
   }
 
@@ -49,13 +47,8 @@ export class Tab1Page implements OnInit{
     .subscribe({
       next:
       resp => {
-
         const newPopulares = [...this.populares, ...resp.results]
-
         this.populares = newPopulares;
-
-
-        console.log('populares: ', this.populares)
         },
       error: err =>{
         console.log(err)

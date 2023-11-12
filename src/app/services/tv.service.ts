@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { TvDetalle, TvSeriesResponse, TvCast, Result } from '../interfaces/tv.interfaces';
+import { TvDetalle, TvSeriesResponse, TvCast, Result, Genre, GenresTvResponse } from '../interfaces/tv.interfaces';
+
 
 
 
@@ -20,7 +21,9 @@ export class TvService {
   private _currentPage = 0;
   private _currentSearchPage = 0;
 
-  isLoading = false;
+  public genres: Genre[] = [];
+
+  public isLoading = false;
 
   get currentSearchPage() {
     return this._currentSearchPage
@@ -81,7 +84,15 @@ export class TvService {
   resetSearchPage(){
     this._currentSearchPage = 0;
   }
-
+  loadGenre():Promise<Genre[]> {
+    return new Promise( resolve =>{
+      this.ejecutarQuery<GenresTvResponse>(`/genre/tv/list?a=1`)
+      .subscribe(resp =>{
+        this.genres = resp.genres
+        resolve(this.genres)
+      })
+    })
+  }
 
 
 }

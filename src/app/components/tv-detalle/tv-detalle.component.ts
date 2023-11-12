@@ -4,6 +4,7 @@ import { Cast, Season, TvDetalle } from 'src/app/interfaces/tv.interfaces';
 import { TvService } from 'src/app/services/tv.service';
 import { SeasonDetailComponent } from '../season-detail/season-detail.component';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { DataLocalService } from 'src/app/services/data-local.service';
 
 @Component({
   selector: 'app-tv-detalle',
@@ -23,13 +24,21 @@ export class TvDetalleComponent  implements OnInit {
   private modalCtrl = inject ( ModalController )
   private iab = inject ( InAppBrowser)
   private platform = inject( Platform )
+  private dataSvc = inject ( DataLocalService )
 
+  public icon = 'star-outline';
+  public textIcon = 'Favorito';
+
+  private _existe = false;
 
 
   @Input() id!: number
 
-  ngOnInit() {
-    /* console.log('ID: ', this.id) */
+  async ngOnInit() {
+  this._existe = await this.dataSvc.existeTvSerie( this.id );
+  this.icon = this._existe ? 'star' : 'star-outline';
+  this.textIcon = this._existe ? 'Quitar' : 'Favorito';
+
 
    this.tvSvc.getPeliculaDetalle( this.id)
     .subscribe( resp => {
@@ -53,7 +62,11 @@ export class TvDetalleComponent  implements OnInit {
   this.modalCtrl.dismiss()
   }
 
- favoritos (){
+ async favoritos (){
+  const existe = await this.dataSvc.guardarTvSerie( this.serie )
+
+  this.icon = existe ? this.icon = 'star' : 'star-outline';
+  this.textIcon = existe ? this.textIcon = 'Quitar' :' Favorito';
 
  }
 

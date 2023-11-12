@@ -44,7 +44,6 @@ export class DetalleComponent  implements OnInit {
     this.movieSvc.getPeliculaDetalle( this.id)
      .subscribe( resp => {
        this.pelicula = resp;
-       /* console.log('la pelicula es, ',this.pelicula) */
      })
 
      this.movieSvc.getActoresPelicula( this.id)
