@@ -15,6 +15,7 @@ import { SeasonDetailComponent } from './season-detail/season-detail.component';
 
 
 
+
 @NgModule({
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA   // importacion necesaria para el swiperSlide.
@@ -28,7 +29,8 @@ import { SeasonDetailComponent } from './season-detail/season-detail.component';
     SlideshowBackdropComponent,
     DetalleComponent,
     TvDetalleComponent,
-    SeasonDetailComponent
+    SeasonDetailComponent,
+
   ],
   exports:[
     SlideTvShowPosterComponent,
@@ -39,7 +41,8 @@ import { SeasonDetailComponent } from './season-detail/season-detail.component';
     SlideshowBackdropComponent,
     DetalleComponent,
     TvDetalleComponent,
-    SeasonDetailComponent
+    SeasonDetailComponent,
+
   ],
   imports: [
     IonicModule,

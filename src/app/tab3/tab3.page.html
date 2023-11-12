@@ -5,28 +5,38 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense" mode="ios">
-    <ion-toolbar>
-      <ion-title size="large">Favoritos</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div *ngFor="let favorito of favoritosPorGenero">
-
-    <ion-grid fixed  *ngIf="favorito.peliculas.length > 0">
-      <ion-row>
-        <ion-col>
-          <h4>{{favorito.genero.name}}</h4>
-        </ion-col>
-
-      </ion-row>
-      <slideshow-poster [peliculas] = "favorito.peliculas"></slideshow-poster>
-    </ion-grid>
-
-
-  </div>
-
-
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <ion-item *ngIf="peliculas.length < 1" class="ion-padding">
+          <ion-label>No Hay favoritos</ion-label>
+          <ion-icon slot="start" name="warning-outline"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div *ngFor="let generos of peliculas | ordenarPorGenero" style="color: var(--ion-color-primary);">
+          <h1 *ngIf="generos.peliculas.length > 0" class="ion-padding">{{generos.genero.name}}</h1>
+          <ion-list
+                    lines="none"
+                    style="margin: 5px 5px;
+                           display: flex;
+                           flex-direction: row;
+                           overflow-x: scroll;
+                           background-color: #121212;
+                           "
+                    *ngIf="generos.peliculas.length > 0"
+                        >
+          <div  *ngFor="let pelicula of generos.peliculas">
+            <img style="margin: 10px" [src]="pelicula.poster_path | images" class="poster2" (click)="verDetalle(pelicula.id)">
+           </div>
+        </ion-list>
+        </div>
+        <div class="ion-padding"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+

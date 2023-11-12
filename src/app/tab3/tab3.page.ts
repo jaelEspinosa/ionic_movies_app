@@ -4,6 +4,8 @@ import { PeliculaDetalle } from '../interfaces/interfaces';
 import { DataLocalService } from '../services/data-local.service';
 import { MoviesService } from '../services/movies.service';
 import { Genre } from '../interfaces/tv.interfaces';
+import { DetalleComponent } from '../components/detalle/detalle.component';
+import { ModalController } from '@ionic/angular';
 
 
 @Component({
@@ -18,6 +20,7 @@ export class Tab3Page {
   peliculasFavoritas: PeliculaDetalle[] = [];
   dataSvc = inject ( DataLocalService );
   movieSvc = inject ( MoviesService );
+  modalCtrl = inject ( ModalController )
 
   genres: Genre[] = [];
 
@@ -25,7 +28,20 @@ export class Tab3Page {
     return this.dataSvc.favoritosPorGenero
   }
 
+  get peliculas(): PeliculaDetalle[]{
+    return this.dataSvc.peliculas
+  }
 
+  async verDetalle(id: number) {
+
+    const modal = await this.modalCtrl.create({
+      component: DetalleComponent,
+      componentProps:{
+        id
+      }
+    })
+    modal.present();
+  }
 
 
 

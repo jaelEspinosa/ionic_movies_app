@@ -4,6 +4,7 @@ import { ImagesPipe } from './images.pipe';
 import { ParesPipe } from './pares.pipe';
 import { CustomDatePipe } from './custom-date.pipe';
 import { CustomCountriePipe } from './customCountrie.pipe';
+import { OrdenarPorGeneroPipe } from './ordenar-por-genero.pipe';
 
 
 
@@ -13,7 +14,8 @@ import { CustomCountriePipe } from './customCountrie.pipe';
     ImagesPipe,
     ParesPipe,
     CustomDatePipe,
-    CustomCountriePipe
+    CustomCountriePipe,
+    OrdenarPorGeneroPipe
   ],
   imports: [
     CommonModule
@@ -22,7 +24,8 @@ import { CustomCountriePipe } from './customCountrie.pipe';
     ImagesPipe,
     ParesPipe,
     CustomDatePipe,
-    CustomCountriePipe
+    CustomCountriePipe,
+    OrdenarPorGeneroPipe
 
   ]
 })

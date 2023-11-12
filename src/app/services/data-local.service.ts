@@ -1,6 +1,6 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { Genre, PeliculaDetalle, PeliculasPorGenero } from '../interfaces/interfaces';
+import { PeliculaDetalle, PeliculasPorGenero } from '../interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
 import { MoviesService } from './movies.service';
 
@@ -11,13 +11,17 @@ import { MoviesService } from './movies.service';
 })
 export class DataLocalService {
 
-  private storage = inject ( Storage )
-  private toastCtrl = inject ( ToastController )
-  private moviesSvc = inject ( MoviesService )
+  constructor(
+    private storage: Storage,
+    private toastCtrl: ToastController,
+    private moviesSvc: MoviesService
+  ) {
+    this.init();
+  }
 
  private _favoritosPorGenero: PeliculasPorGenero[]= []
 
- public  peliculas: PeliculaDetalle[] = []
+ private _peliculas: PeliculaDetalle[] = []
 
 
 get favoritosPorGenero (): PeliculasPorGenero[] {
@@ -26,11 +30,12 @@ get favoritosPorGenero (): PeliculasPorGenero[] {
 
 }
 
+get peliculas ():PeliculaDetalle [] {
+  return [...this._peliculas]
+}
 
 
-  constructor() {
-    this.init();
-  }
+
   async presentToast(message: string){
     const toast = await this.toastCtrl.create({
       message,
@@ -44,8 +49,8 @@ get favoritosPorGenero (): PeliculasPorGenero[] {
   async init(){
     const storage = await this.storage.create();
     await this.cargarPeliculasFavoritos();
-    const generos = await this.moviesSvc.loadGenre()
-    this.createFavoritosPorGenero(this.peliculas , generos)
+    await this.moviesSvc.loadGenre()
+
 
  }
 
@@ -53,7 +58,7 @@ get favoritosPorGenero (): PeliculasPorGenero[] {
 
     let exists = false;
     let mensaje = ''
-    for(const peli of this.peliculas){
+    for(const peli of this._peliculas){
       if (peli.id === pelicula.id){
         exists = true;
         break;
@@ -61,47 +66,28 @@ get favoritosPorGenero (): PeliculasPorGenero[] {
     }
 
     if (exists){
-      this.peliculas = this.peliculas.filter(peli=> peli.id !== pelicula.id)
+      this._peliculas = this._peliculas.filter(peli=> peli.id !== pelicula.id)
       mensaje = 'Removido de favoritos'
     }else{
-      this.peliculas.unshift( pelicula )
+      this._peliculas.unshift( pelicula )
       mensaje = 'Agregado a favoritos'
     }
 
-    await this.storage.set('peliculas', this.peliculas)
+    await this.storage.set('peliculas', this._peliculas)
     this.presentToast(mensaje)
-
     return !exists
   }
 
  async cargarPeliculasFavoritos(){
     const peliculasFavoritos = await this.storage.get('peliculas');
-    this.peliculas = peliculasFavoritos || [];
+    this._peliculas = peliculasFavoritos || [];
 
-    return this.peliculas
+    return this._peliculas
  }
 
 async existePelicula( id:number ){
-
-
-  const existe = this.peliculas.find(peli => peli.id === id)
-
-
+  const existe = this._peliculas.find(peli => peli.id === id)
   return (existe) ? true : false;
 }
-
-createFavoritosPorGenero (peliculas: PeliculaDetalle[], generos: Genre[]) {
- console.log('creando favoritos por genero de ', peliculas,' y generos ', generos)
- generos.forEach(genero =>{
-  this._favoritosPorGenero.push({
-    genero,
-    peliculas: peliculas.filter(peli => {
-       return peli.genres.find( genre => genre.id === genero.id)
-    })
-  })
- })
-console.log('Los favoritos por genero son...', this._favoritosPorGenero)
-}
-
 
 }
