@@ -48,9 +48,10 @@ export class SlideshowParesComponent  implements OnInit {
 
 
   onScroll(event: any){
+    this.loadMoreData.emit()
+
     if (this.isEndOfScroll(event)) {
       setTimeout(() => {
-        this.loadMoreData.emit()
       }, 500);
     }
   }

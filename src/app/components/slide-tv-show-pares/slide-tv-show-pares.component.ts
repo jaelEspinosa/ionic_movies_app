@@ -43,17 +43,8 @@ export class SlideTvShowParesComponent  implements OnInit {
 
 
   onScroll(event: any){
-    if (this.isEndOfScroll(event)) {
-      setTimeout(() => {
-        this.loadMoreData.emit()
-      }, 500);
-    }
+    this.loadMoreData.emit()
   }
 
-  isEndOfScroll(event: any): boolean {
-    return (
-      event.target.scrollLeft + event.target.offsetWidth >= event.target.scrollWidth
-    );
-  }
 
 }

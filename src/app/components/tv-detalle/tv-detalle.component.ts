@@ -5,6 +5,7 @@ import { TvService } from 'src/app/services/tv.service';
 import { SeasonDetailComponent } from '../season-detail/season-detail.component';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { DataLocalService } from 'src/app/services/data-local.service';
+import { DetalleActorsComponent } from '../detalle-actors/detalle-actors.component';
 
 @Component({
   selector: 'app-tv-detalle',
@@ -22,7 +23,7 @@ export class TvDetalleComponent  implements OnInit {
 
   private tvSvc = inject ( TvService)
   private modalCtrl = inject ( ModalController )
-  private iab = inject ( InAppBrowser)
+  private iab = inject ( InAppBrowser )
   private platform = inject( Platform )
   private dataSvc = inject ( DataLocalService )
 
@@ -86,5 +87,17 @@ onClickBrowser(){
   }
   window.open(this.serie.homepage, '_blank')
 }
+
+async detalleActor(id: number) {
+
+
+  const modal = await this.modalCtrl.create({
+    component: DetalleActorsComponent,
+    componentProps:{
+      id
+    }
+  })
+  modal.present();
+ }
 
 }

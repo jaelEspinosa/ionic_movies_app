@@ -109,10 +109,10 @@
     <swiper-slide *ngFor="let actor of actores">
 
       <ion-card class="card-actor" class="ion-padding">
-        <img class="img-slide" *ngIf="actor.profile_path" [src]="actor.profile_path | images" />
+        <img (click)="detalleActor(actor.id)" class="img-slide" *ngIf="actor.profile_path" [src]="actor.profile_path | images" />
         <img class="img-slide" *ngIf="!actor.profile_path" src="./assets/no-avatar.jpg" />
 
-        <ion-label style="font-size: 90%;">{{actor.name}}</ion-label>
+        <ion-label [color]="actor.profile_path ? 'primary' : ''" style="font-size: 90%;">{{actor.name}}</ion-label>
       </ion-card>
 
     </swiper-slide>

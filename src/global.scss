@@ -49,7 +49,7 @@
 }
 
 .item-horizontal{
-  min-width: 25vw;
+  min-width: 85vw;
 }
 
 @media (max-width: 1290px){
@@ -83,8 +83,15 @@
 
  }
 
+ @media (max-width: 412px){
+  .slide-image{
+    min-width: 280px;
+   }
+
+ }
+
  .myIon-item{
-  min-width: 30vw!important;
+  min-width: 20vw!important;
   display: flex!important;
   flex-direction: column!important;
   align-items:center!important;
@@ -155,4 +162,12 @@
   background-image: url('/assets/cine.jpg');
   background-position: center;
   background-size: center;
+}
+
+.my-button{
+  height: 200px;
+  background-color:var(--ion-color-primary);
+  border-radius: 18px;
+  padding:0px 5px;
+
 }

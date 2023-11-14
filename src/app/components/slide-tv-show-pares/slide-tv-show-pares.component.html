@@ -2,7 +2,6 @@
 style="display: flex;
        flex-direction: row;
        overflow-x: scroll;"
-(scroll) = "onScroll($event)"
        >
 <ion-item  *ngFor="let pares of tvRecientes | pares" class="item-horizontal">
 <div style="display: flex; flex-direction: column; gap: 20px;">
@@ -17,14 +16,8 @@ style="display: flex;
 class="myIon-item"
 *ngIf="!error"
    >
-<div class="mySpinner-container">
-<div class="mySpinner">
-<ion-spinner name="bubbles"></ion-spinner>
-</div>
-<div class="mySpinner">
-<ion-spinner name="bubbles"></ion-spinner>
-</div>
-</div>
-
+  <button shape="round" class="my-button ion-padding" (click)="onScroll($event)">
+    <ion-icon slot="icon-only" name="caret-forward-outline"></ion-icon>
+  </button>
 </ion-item>
 </ion-list>

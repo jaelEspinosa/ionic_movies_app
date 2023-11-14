@@ -3,6 +3,9 @@ import { ModalController } from '@ionic/angular';
 import { Cast, PeliculaDetalle } from 'src/app/interfaces/interfaces';
 import { DataLocalService } from 'src/app/services/data-local.service';
 import { MoviesService } from 'src/app/services/movies.service';
+import { DetalleActorsComponent } from '../detalle-actors/detalle-actors.component';
+import { ActoresDetalle } from 'src/app/interfaces/actors';
+import { ActorsService } from 'src/app/services/actors.service';
 
 
 
@@ -25,6 +28,7 @@ export class DetalleComponent  implements OnInit {
   private movieSvc = inject ( MoviesService)
   public  dataSvc = inject ( DataLocalService )
   private modalCtrl = inject ( ModalController )
+
 
   public icon = 'star-outline'
   public textIcon = 'Favorito'
@@ -49,7 +53,7 @@ export class DetalleComponent  implements OnInit {
      this.movieSvc.getActoresPelicula( this.id)
      .subscribe( resp => {
        this.actores = resp.cast
-       console.log(resp.cast)
+       console.log('los actores son',this.actores)
      })
 
   }
@@ -68,6 +72,21 @@ export class DetalleComponent  implements OnInit {
    this.icon = existe ? this.icon = 'star' : 'star-outline';
    this.textIcon = existe ? this.textIcon = 'Quitar' : 'Favorito';
 
+ }
+
+
+
+
+async detalleActor(id: number) {
+
+
+  const modal = await this.modalCtrl.create({
+    component: DetalleActorsComponent,
+    componentProps:{
+      id
+    }
+  })
+  modal.present();
  }
 
 }

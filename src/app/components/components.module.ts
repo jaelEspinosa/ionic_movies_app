@@ -11,6 +11,7 @@ import { SlideTvShowPosterComponent } from './slide-tv-show-poster/slide-tv-show
 import { SlideTvShowParesComponent } from './slide-tv-show-pares/slide-tv-show-pares.component';
 import { TvDetalleComponent } from './tv-detalle/tv-detalle.component';
 import { SeasonDetailComponent } from './season-detail/season-detail.component';
+import { DetalleActorsComponent } from './detalle-actors/detalle-actors.component';
 
 
 
@@ -30,6 +31,7 @@ import { SeasonDetailComponent } from './season-detail/season-detail.component';
     DetalleComponent,
     TvDetalleComponent,
     SeasonDetailComponent,
+    DetalleActorsComponent
 
   ],
   exports:[
@@ -42,6 +44,7 @@ import { SeasonDetailComponent } from './season-detail/season-detail.component';
     DetalleComponent,
     TvDetalleComponent,
     SeasonDetailComponent,
+    DetalleActorsComponent
 
   ],
   imports: [
