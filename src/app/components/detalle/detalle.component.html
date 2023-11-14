@@ -1,4 +1,9 @@
-<ion-content *ngIf="pelicula">
+
+
+<ion-content >
+  <div style="display:flex; align-items: center; justify-content: center; width: 100vw; height: 100vh;" *ngIf="!pelicula">
+    <ion-label style="display: flex; align-items: center; justify-content: center;"> <ion-spinner color="primary"  name="bubbles"></ion-spinner></ion-label>
+  </div>
   <ion-label class="titulo">
     <h1>{{ pelicula.title }}</h1>
   </ion-label>

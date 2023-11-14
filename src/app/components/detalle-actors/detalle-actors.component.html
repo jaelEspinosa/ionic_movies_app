@@ -1,8 +1,7 @@
 <ion-content>
-   <ion-item *ngIf="!actor">
-    <ion-spinner name="bubbles"></ion-spinner>
-    <ion-label>Cargando</ion-label>
-   </ion-item>
+  <div style="display:flex; align-items: center; justify-content: center; width: 100vw; height: 100vh;" *ngIf="!actor">
+    <ion-label style="display: flex; align-items: center; justify-content: center;"> <ion-spinner  color="primary" name="bubbles"></ion-spinner></ion-label>
+  </div>
 <ion-grid fixed >
   <ion-row *ngIf="actor && actor.name">
     <ion-col size="12">
